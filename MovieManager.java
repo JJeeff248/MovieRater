@@ -21,6 +21,7 @@ public class MovieManager{
     private String genre;
     private String director;
     private boolean rating;
+    private String bill;
     
     public MovieManager() {
         UI.initialise();
@@ -28,7 +29,6 @@ public class MovieManager{
         UI.addTextField("Genre", this::setgenre);
         UI.addTextField("Director", this::setdirector);
         UI.addButton("Submit", this::submit);
-        UI.addButton("Quit", UI::quit);
     }
     
     public void setTitle(String usertitle) {
@@ -48,6 +48,11 @@ public class MovieManager{
         UI.println(genre);
         UI.println(director);
         // if statement to check all fields are not empty
+        if(title != "" && genre != "" && director != "") {
+            Movie test = new Movie(title, genre, director);
+            bill = test.getTitle();
+            UI.println(bill);
+        }
     }
     
     public static void main(String[] args) {

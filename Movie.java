@@ -19,6 +19,21 @@ import java.awt.Color;
  * Rating as boolean
  */
 public class Movie{
-    // do stuff
+    
+    // Create Fields
+    private String title;
+    private String genre;
+    private String director;
+    private boolean rating;
+    
+    public Movie(String userTitle, String userGenre, String userDirector) {
+        this.title = userTitle;
+        this.genre = userGenre;
+        this.director = userDirector;
+    }
+    
+    public String getTitle() {
+        return this.title;
+    }
 }
 
