@@ -11,8 +11,8 @@ import java.io.*;
 import java.awt.Color;
 
 
-/** Manage all movie objects stored in hashmap
- * and provide a recomendation
+/** Manage all movie objects stored in hash-map
+ * and provide a recommendation
  */
 public class MovieManager{
 
@@ -28,6 +28,8 @@ public class MovieManager{
         UI.addTextField("Title", this::setTitle);
         UI.addTextField("Genre", this::setgenre);
         UI.addTextField("Director", this::setdirector);
+        //UI.addButton("Good", this::setRating);
+        //UI.addButton("Bad", this::setRating);
         UI.addButton("Submit", this::submit);
     }
     
@@ -44,14 +46,12 @@ public class MovieManager{
     }
     
     public void submit(){
-        UI.println(title);
-        UI.println(genre);
-        UI.println(director);
         // if statement to check all fields are not empty
-        if(title != "" && genre != "" && director != "") {
+        if(title != null && genre != null && director != null) {
             Movie test = new Movie(title, genre, director);
-            bill = test.getTitle();
-            UI.println(bill);
+            title = null;
+            genre = null;
+            director = null;
         }
     }
     
