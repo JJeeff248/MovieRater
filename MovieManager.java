@@ -28,27 +28,36 @@ public class MovieManager{
         UI.addTextField("Title", this::setTitle);
         UI.addTextField("Genre", this::setgenre);
         UI.addTextField("Director", this::setdirector);
-        //UI.addButton("Good", this::setRating);
-        //UI.addButton("Bad", this::setRating);
+        UI.addButton("Good", this::setRatingGood);
+        UI.addButton("Bad", this::setRatingBad);
+        
         UI.addButton("Submit", this::submit);
     }
     
-    public void setTitle(String usertitle) {
+    private void setRatingGood() {
+        rating = true;
+    }
+    
+    private void setRatingBad() {
+        rating = false;
+    }
+    
+    private void setTitle(String usertitle) {
         title = usertitle;
     }
     
-    public void setgenre(String usergenre) {
+    private void setgenre(String usergenre) {
         genre = usergenre;
     }
     
-    public void setdirector(String userdirector) {
+    private void setdirector(String userdirector) {
         director = userdirector;
     }
-    
-    public void submit(){
+
+    private void submit(){
         // if statement to check all fields are not empty
         if(title != null && genre != null && director != null) {
-            Movie test = new Movie(title, genre, director);
+            Movie test = new Movie(title, genre, director, rating);
             title = null;
             genre = null;
             director = null;

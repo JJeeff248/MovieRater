@@ -26,10 +26,11 @@ public class Movie{
     private String director;
     private boolean rating;
     
-    public Movie(String userTitle, String userGenre, String userDirector) {
+    public Movie(String userTitle, String userGenre, String userDirector, boolean userRating) {
         this.title = userTitle;
         this.genre = userGenre;
         this.director = userDirector;
+        this.rating = userRating;
     }
     
     public String getTitle() {
