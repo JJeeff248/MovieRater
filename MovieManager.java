@@ -25,13 +25,13 @@ public class MovieManager{
     
     public MovieManager() {
         UI.initialise();
-        UI.addTextField("Title", this::setTitle);
-        UI.addTextField("Genre", this::setgenre);
-        UI.addTextField("Director", this::setdirector);
-        UI.addButton("Good", this::setRatingGood);
-        UI.addButton("Bad", this::setRatingBad);
+        UI.addTextField("Title / Taitara", this::setTitle);
+        UI.addTextField("Genre / Momo", this::setgenre);
+        UI.addTextField("Director / Kaitohu", this::setdirector);
+        UI.addButton("Good / Ka pai", this::setRatingGood);
+        UI.addButton("Bad / Kiripiro", this::setRatingBad);
         
-        UI.addButton("Submit", this::submit);
+        UI.addButton("Submit / Tuku kōrero", this::submit);
     }
     
     private void setRatingGood() {
