@@ -36,5 +36,17 @@ public class Movie{
     public String getTitle() {
         return this.title;
     }
+    
+    public String getGenre() {
+        return this.genre;
+    }
+    
+    public String getDirector() {
+        return this.director;
+    }
+    
+    public boolean getRating() {
+        return this.rating;
+    }
 }
 
