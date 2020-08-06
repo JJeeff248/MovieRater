@@ -22,7 +22,7 @@ public class MovieManager{
     private String title;
     private String genre;
     private String director;
-    private boolean rating;
+    private String rating;
     private String bill;
     
     // Set constants
@@ -38,8 +38,8 @@ public class MovieManager{
         UI.initialise();
         
         UI.addTextField("Title / Taitara", this::setTitle);
-        UI.addTextField("Genre / Momo", this::setgenre);
-        UI.addTextField("Director / Kaitohu", this::setdirector);
+        UI.addTextField("Genre / Momo", this::setGenre);
+        UI.addTextField("Director / Kaitohu", this::setDirector);
         UI.addButton("Like / Matareka", this::setRatingGood);
         UI.addButton("Dislike / Matakawa", this::setRatingBad);
         
@@ -49,23 +49,23 @@ public class MovieManager{
     }
     
     private void setRatingGood() {
-        rating = true;
+        rating = "Like";
     }
     
     private void setRatingBad() {
-        rating = false;
+        rating = "Dislike";
     }
     
     private void setTitle(String usertitle) {
-        title = usertitle;
+        title = usertitle.trim();
     }
     
-    private void setgenre(String usergenre) {
-        genre = usergenre;
+    private void setGenre(String usergenre) {
+        genre = usergenre.trim();
     }
     
-    private void setdirector(String userdirector) {
-        director = userdirector;
+    private void setDirector(String userdirector) {
+        director = userdirector.trim();
     }
 
     private void submit(){
@@ -74,9 +74,10 @@ public class MovieManager{
             Movie test = new Movie(title, genre, director, rating);
             movieRatings.put(title, test);
             title = null;
-            genre = null;
-            director = null;
+            rating = "";
             drawMovie();
+        } else {
+            UI.println("Please fill in all the \nrequired feilds");
         }
     }
     
@@ -89,6 +90,13 @@ public class MovieManager{
                 UI.drawString(i.getTitle(), LEFT + 10, top + 30);
                 UI.drawString("Genre: " + i.getGenre(), LEFT + 10, top + 60);
                 UI.drawString("Director: " + i.getDirector(), LEFT + 10, top + 80);
+                if (i.getRating() == "Like") {
+                    UI.drawImage("images/thumbsUp.png", WIDTH-(LEFT*2), HEIGHT/2+top,
+                                50, 50);
+                } else if (i.getRating() == "Dislike") {
+                    UI.drawImage("images/thumbsDown.png", WIDTH-(LEFT*2), HEIGHT/2+top,
+                                50, 50);
+                }
                 top += 120;
         }
         

@@ -24,9 +24,9 @@ public class Movie{
     private String title;
     private String genre;
     private String director;
-    private boolean rating;
+    private String rating;
     
-    public Movie(String userTitle, String userGenre, String userDirector, boolean userRating) {
+    public Movie(String userTitle, String userGenre, String userDirector, String userRating) {
         this.title = userTitle;
         this.genre = userGenre;
         this.director = userDirector;
@@ -45,7 +45,7 @@ public class Movie{
         return this.director;
     }
     
-    public boolean getRating() {
+    public String getRating() {
         return this.rating;
     }
 }
