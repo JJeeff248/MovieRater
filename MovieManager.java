@@ -4,13 +4,21 @@
  * Date: 02/07/2020
  */
 
- 
+  
 
 import ecs100.*;
 import java.util.*;
 import java.io.*;
 import java.awt.Color;
+
+// Data storage
 import java.util.HashMap;
+import java.util.ArrayList;
+
+// File handling
+import java.io.File;
+import java.io.FileReader;
+import java.util.Scanner;
 
 
 /** Manage all movie objects stored in hash-map
@@ -25,7 +33,7 @@ public class MovieManager {
     private String title;
     private String genre;
     private String director;
-    private String rating;
+    private String rating = "";
     private String bill;
     
     // Set constants
@@ -41,17 +49,65 @@ public class MovieManager {
      * Constructor method for class MovieManager
      */
     public MovieManager() {
-        //UI.initialise();
+        addFromFile();
+        //mainMenu();
+    }
+    
+    private void mainMenu() {
+        UI.initialise();
+        UI.setDivider(0.3);
+        UI.setFontSize(20);
         
-        //UI.addTextField("Title / Taitara", this::setTitle);
-        //UI.addTextField("Genre / Momo", this::setGenre);
-        //UI.addTextField("Director / Kaitohu", this::setDirector);
-        //UI.addButton("Like / Matareka", this::setRatingGood);
-        //UI.addButton("Dislike / Matakawa", this::setRatingBad);
+        UI.addButton("Add Movie", this::addMovieUi);
+        UI.addButton("Recommend", this::recommend);
+        UI.addButton("Quit", UI::quit);
         
-        //UI.addButton("Submit / Tuku kōrero", this::submit);
-        //UI.setDivider(0.3);
-        //UI.setFontSize(20);
+        drawMovie();
+    }
+    
+    private void addFromFile() {
+        File file = new File("movies.txt");
+        
+        try {
+            Scanner fileRead = new Scanner(file);
+            
+            while (fileRead.hasNextLine()) {
+                String line = fileRead.nextLine();
+                char[] chars = line.toCharArray();
+                String[] entries = new String[3];
+                String entry = "";
+                for (char i : chars) {
+                    if (i == 0x2c) {
+                        entries[entries.length - 1] = entry;
+                        entry ="";
+                    } else {
+                        UI.println(i);
+                        entry += i;
+                        UI.println(entry);
+                    }
+                }
+                Movie movie = new Movie(entries[0], entries[1], entries[2], rating);
+                UI.println(entries[0]);
+                movieRatings.put(movie.getTitle(), movie);
+            }
+        }
+        
+        catch (Exception e) {
+            UI.println(e);
+        }
+        
+    }
+    
+    private void addMovieUi() {
+        UI.initialise();
+        UI.addTextField("Title / Taitara", this::setTitle);
+        UI.addTextField("Genre / Momo", this::setGenre);
+        UI.addTextField("Director / Kaitohu", this::setDirector);
+        UI.addButton("Like / Matareka", this::setRatingGood);
+        UI.addButton("Dislike / Matakawa", this::setRatingBad);
+        
+        UI.addButton("Submit / Tuku kōrero", this::submit); // Special char c58d
+        UI.addButton("Back", this::mainMenu);
     }
     
     /**
@@ -96,11 +152,11 @@ public class MovieManager {
         // if statement to check all fields are not empty
         if (title != null && genre != null && director != null &&
             !title.equals("") && !genre.equals("") && !director.equals("")) {
-            Movie test = new Movie(title, genre, director, rating);
-            movieRatings.put(title, test);
+            Movie movie = new Movie(title, genre, director, rating);
+            movieRatings.put(title, movie);
             title = null;
             rating = "";
-            drawMovie();
+            mainMenu();
         } 
         else if (title == null || title.equals("")) {
             UI.println("Please enter a title");
@@ -136,6 +192,30 @@ public class MovieManager {
             top += 120;
         }
         
+    }
+    
+    /**
+     * Recomends a movie based on Genre and/or director
+     */
+    private void recommend() {
+        UI.clearGraphics();
+        UI.clearText();
+        
+        ArrayList<Movie> likedMovies = new ArrayList<Movie>();
+        
+        // Find movies the user liked
+        UI.println("Recommendations for you");
+        for (String i : movieRatings.keySet()) {
+            Movie movie = movieRatings.get(i);
+            if (movie.getRating().equals("Like")) {
+                likedMovies.add(movie);
+            }
+        }
+        // Look for similar movies based on genre and/or director
+        for (Movie i : likedMovies) {
+            UI.println(i.getTitle());
+        }
+        // Print or draw the recomendation
     }
     
     /**
