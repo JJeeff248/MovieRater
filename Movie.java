@@ -9,6 +9,7 @@ import ecs100.*;
 import java.util.*;
 import java.io.*;
 import java.awt.Color;
+import java.util.ArrayList;
 
 
 /** 
@@ -17,36 +18,69 @@ import java.awt.Color;
  * Genre as String
  * Director as String
  * Rating as boolean
+ * 
+ * @author sach
+ * @version 1
  */
-public class Movie{
+public class Movie {
     
     // Create Fields
     private String title;
-    private String genre;
+    private ArrayList<String> genre = new ArrayList<String>();
     private String director;
     private String rating;
     
-    public Movie(String userTitle, String userGenre, String userDirector, String userRating) {
+    /**
+     * Initialise fields
+     * 
+     * @param userTitle String passed in from movieManager
+     * @param userGenre ArrayList passed in from movieManager
+     * @param userDirector String passed in from movieManager
+     * @param userRating String passed in from movieManager
+     */
+    public Movie(String userTitle, ArrayList userGenre,
+                    String userDirector, String userRating) {
         this.title = userTitle;
         this.genre = userGenre;
         this.director = userDirector;
         this.rating = userRating;
     }
     
+    /**
+     * @return movies title
+     */
     public String getTitle() {
         return this.title;
     }
     
-    public String getGenre() {
+    /**
+     * @return movies genres
+     */
+    public ArrayList getGenre() {
         return this.genre;
     }
     
+    /**
+     * @return movies director
+     */
     public String getDirector() {
         return this.director;
     }
     
+    /**
+     * @return movies rating
+     */
     public String getRating() {
         return this.rating;
     }
+    
+    /**
+     * Updates the movies rating
+     * @param rate String passed in from movieManager
+     */
+    public void setRating(String rate) {
+        this.rating = rate;
+    }
+    
 }
 
