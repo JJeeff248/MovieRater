@@ -25,7 +25,7 @@ import java.util.Scanner;
  * and provide a recommendation
  * 
  * @author SACH
- * @version 11/08/2020
+ * @version 25/08/2020
  */
 public class MovieManager {
 
@@ -303,7 +303,7 @@ public class MovieManager {
                 // find an unrated movie with same genre/s
                 for (String j : movieRatings.keySet()) {
                     Movie possibleMovie = movieRatings.get(j);
-                    if (possibleMovie.getRating().equals("")) {
+                    if (possibleMovie.getRating().equals("") && !(possibleMovie.getRating().equals("Dislike"))) { // Not dislike
                         ArrayList genres = possibleMovie.getGenre();                        
                         for (int k = 0; k < genres.size(); k++) {
                             String genre = genres.get(k).toString();
@@ -319,7 +319,8 @@ public class MovieManager {
                 // Randomly select a possible movie
                 int random = (int) (Math.random() * possibleMovies.size());
                 Movie recommenedMovie = possibleMovies.get(random);
-                UI.println("Recommendation for you");
+                UI.println("Because you liked \n" + likedMovie.getTitle()
+                            + "\nwe recommend:");
                 drawMovie(recommenedMovie);
             }
             else {
