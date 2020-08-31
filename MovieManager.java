@@ -212,10 +212,16 @@ public class MovieManager {
      * Sets the genre from user input
      */
     private void setGenre(String userGenre) {
+        genre.clear();
         String[] genres = userGenre.split(" ");
         for (String i : genres) {
             genre.add(capString(i));
         }
+        // Remove any empty entries
+        do {
+            genre.remove("");
+        }
+        while (genre.contains(""));
     }
     
     /**
