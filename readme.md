@@ -22,8 +22,4 @@ On this menu you have 5 options:
 * View All
   * Displays all the stored movies
 * Quit
-  * Exits the program __NOTE: ALL USER ADDED MOVIES WILL NOT BE STORED__
-  
-  
-# TODO
-* Store user added movies
+  * Exits the program
