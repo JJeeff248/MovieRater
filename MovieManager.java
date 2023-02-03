@@ -240,6 +240,13 @@ public class MovieManager {
             !title.equals("") && !genre.equals("") && !director.equals("")) {
             Movie movie = new Movie(title, genre, director, userRating);
             movieRatings.put(title, movie);
+            try (PrintWriter out = new PrintWriter(new FileWriter("movies.txt", true))) {
+                out.print("\n" + title + ", " + Arrays.toString(genre.toArray())
+                        .replaceAll("[\\[\\],]", "") + ", " + director + ",");
+            }
+            catch (Exception e) {
+                UI.println(e);
+            }
             title = null;
             userRating = "";
             UI.println("Movie added!");
